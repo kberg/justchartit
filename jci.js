@@ -11,21 +11,42 @@ var default_opts = {
       pixelsPerLabel: 60
     }
   },
-  rightGap: 50
+  rightGap: 50,
+  animatedZooms: true,
+  legend: 'always',
+  gridLineWidth: 0.1,
+  strokeWidth: 1.5
 };
+
+var palette = new MultiPalette();
 
 function chartIt() {
   var data = $('#data').attr('value');
-  var user_opts = $('#options').attr('value');
-  user_opts = eval('({' + user_opts + '})');
+  $('#options').val(palette.toHash());
+  var elem = document.getElementById("chart")
+  // Clean the graph before redrawing.
+  elem.innerHTML = "";
+  elem.removeAttribute("style");
+ 
+  var options = palette.read();
+      
+  // Replace the drawCallback function with one that also lets us track
+  // all labels (for the palette.)
+  // If the drawCallback option is not specified, use a null function.
+  var originalDraw = options["drawCallback"] || function() {};
+  options.drawCallback = function(g, isInitial) {
+    palette.setSeries(g.getLabels());
+    // Call the original function, too.
+    originalDraw(g, isInitial);
+  };
 
-  opts = Dygraph.updateDeep({}, default_opts);
-  Dygraph.updateDeep(opts, user_opts);
-
-  g = new Dygraph(document.getElementById("chart"), data, opts);
+  g = new Dygraph(elem, data, options);
 }
 
 $(function() {
+  palette.create($("#optionsPalette")[0]);
+  palette.write(default_opts);
+  palette.onchange = chartIt;
   chartIt();
 });
 

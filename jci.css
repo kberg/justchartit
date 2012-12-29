@@ -10,10 +10,7 @@ body {
 }
 
 #config {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  width: 300px;
+  float: left;
 }
 
 .dygraph-axis-label {

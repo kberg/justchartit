@@ -1,0 +1,108 @@
+.textarea {
+  position: absolute;
+  border: 1px solid black;
+  background-color: #dddddd;
+  z-index: 12;
+}
+
+.textarea .prompt {
+  padding-left: 2px;
+}
+
+.textarea .buttons {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.textarea button {
+  color: #222222;
+}
+
+.textarea .editor {
+  font-family: Inconsolata, Courier New, Courier;
+  margin: 4px;
+}
+
+#modalBackground {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+  background-color:#333333;
+  display: none;
+  opacity: 0.40;
+  filter: alpha(opacity=40)
+}
+.tooltip {
+  position: absolute;
+  border: 1px solid black;
+  background-color: lightyellow;
+  width: 280px;
+}
+
+.tooltip .prompt {
+  font-family: Inconsolata, Courier New, Courier;
+}
+
+.tooltip .type {
+  font-family: Inconsolata, Courier New, Courier;
+  margin-bottom: 0.5em;
+  font-size: smaller;
+}
+
+.tooltip .body {
+  font-size: smaller;
+}
+.palette {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #bbbbbb;
+  font-size: smaller;
+  font-family: Arial, Verdana, sans-serif;
+  width: 300px;
+  padding:2px;
+  color: #333333;
+}
+
+.palette .header {
+  background-color: #b0c0e0;
+}
+
+.palette .odd {
+  background-color: #ccddff;
+}
+
+.palette .even {
+  background-color: #c6d6f4;
+}
+
+.palette .name {
+}
+
+.palette .name:after {
+  content: ":";
+}
+
+.palette .option {
+}
+
+.palette .textInput {
+  padding: 1px;
+  border: 2px inset;
+  border-color: #EEE;
+}
+
+.palette a {
+  color: #3333FF;
+}
+
+.palette a:hover {
+  text-decoration: underline;
+}
+
+.palette a:active {
+  color: #0000FF;
+}

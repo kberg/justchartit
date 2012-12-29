@@ -4,9 +4,12 @@
     <title>Just Chart It!</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="http://dygraphs.com/dygraph-combined.js"></script>
+    <script src="http://dygraphs.com/dygraph-options-reference.js"></script>
+    <script src="palette-combined.js"></script>
     <script src="jci.js"></script>
 
     <link rel="stylesheet" href="jci.css" />
+    <link rel="stylesheet" href="palette-combined.css" />
   </head>
   <body>
     <div id="config">
@@ -20,10 +23,7 @@
 2012-08-14,200,160</textarea>
 
       <p>Options:<br/>
-      <textarea name="config" rows=10 cols=40 id="options">animatedZooms: true,
-legend: 'always',
-gridLineWidth: 0.1,
-strokeWidth: 1.5</textarea>
+      <textarea name="config" rows=10 cols=40 id="options"></textarea>
       </p>
 
       <input type=button value="Chart It!" onClick="chartIt()" />
@@ -33,5 +33,6 @@ strokeWidth: 1.5</textarea>
     </div>
 
     <div id="chart"></div>
+    <div id="optionsPalette"></div>
   </body>
 </html>
