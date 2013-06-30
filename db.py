@@ -36,3 +36,14 @@ def StoreChart(user, options, data):
   key = chart.put()
   assert key.id()
   return chart
+
+def LoadChart(id):
+  return Chart.get_by_id(id)
+
+def ListChartKeys():
+  keys = []
+  q = Chart.all(keys_only=True)
+  for key in q.run():
+    #keys.append(chart.key())
+    keys.append(key.id())
+  return keys

@@ -1,5 +1,6 @@
 import webapp2
 from google.appengine.api import users
+from google.appengine.ext.webapp import template
 
 
 import db
@@ -18,6 +19,22 @@ class SaveHandler(webapp2.RequestHandler):
         chart.key().id(), chart.data_sha224, chart.options))
 
 
+class ViewHandler(webapp2.RequestHandler):
+  def get(self):
+    id = self.request.get('id')
+    chart = db.LoadChart(id)
+
+    self.response.out.write('id = %s<br/>chart.data_sha224 = %s<br/>config = %s\n' % (
+        chart.key().id(), chart.data_sha224, chart.options))
+
+
+class AdminListHandler(webapp2.RequestHandler):
+  def get(self):
+    template_values = {
+      'keys' : db.ListChartKeys()
+    }
+    self.response.out.write(template.render('templates/admin-list.html', template_values))
+
 class FooHandler(webapp2.RequestHandler):
   def get(self):
     user = users.get_current_user()
@@ -26,5 +43,7 @@ class FooHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/save', SaveHandler),
-    ('/foo', FooHandler)
+    ('/view', ViewHandler),
+    ('/foo', FooHandler),
+    ('/admin-list', AdminListHandler)
 ], debug=True)

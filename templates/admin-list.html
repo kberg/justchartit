@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+    <title>List of IDs</title>
+  </head>
+  <body>
+  {% for k in keys %}
+    <a href="/view?id={{k}}">{{k}}</a><br/>
+  {% endfor %}
+  </body>
+</html>
+{% endautoescape %}
