@@ -22,7 +22,7 @@ class SaveHandler(webapp2.RequestHandler):
 class ViewHandler(webapp2.RequestHandler):
   def get(self):
     id = self.request.get('id')
-    chart = db.LoadChart(id)
+    chart = db.LoadChart(int(id))
 
     self.response.out.write('id = %s<br/>chart.data_sha224 = %s<br/>config = %s\n' % (
         chart.key().id(), chart.data_sha224, chart.options))
