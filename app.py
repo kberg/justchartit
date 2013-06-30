@@ -27,9 +27,12 @@ class ViewHandler(webapp2.RequestHandler):
     id = self.request.get('id')
     chart = db.LoadChart(int(id))
 
-    self.response.out.write('id = %s<br/>chart.data_sha224 = %s<br/>config = %s\n' % (
-        chart.key().id(), chart.data_sha224, chart.options))
-
+    template_values = {
+      'data' : db.LoadData(chart.data_sha224),
+      'config' : chart.options
+    }
+    template = JINJA_ENVIRONMENT.get_template('templates/view.html')
+    self.response.out.write(template.render(template_values))
 
 class AdminListHandler(webapp2.RequestHandler):
   def get(self):

@@ -2,9 +2,14 @@ import hashlib
 from google.appengine.ext import db
 from google.appengine.api import users
 
+# Information about a graph is stored in two places:
+# The CSV/TSV data is stored in the TabularData object
+# The options, and reference to the TabularData, are stored
+# in the Chart object.
 
 class TabularData(db.Model):
   # key is the SHA224 hex checksum of data.
+  # TODO(konigsberg): Text is better for text data than Blobs.
   data = db.BlobProperty(required=True)
 
 
@@ -40,10 +45,12 @@ def StoreChart(user, options, data):
 def LoadChart(id):
   return Chart.get_by_id(id)
 
+def LoadData(key):
+  return TabularData.get_by_key_name(key).data.decode('utf-8')
+
 def ListChartKeys():
   keys = []
   q = Chart.all(keys_only=True)
   for key in q.run():
-    #keys.append(chart.key())
     keys.append(key.id())
   return keys

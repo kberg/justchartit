@@ -1,0 +1,35 @@
+<!doctype html>
+{% autoescape true %}
+<html>
+  <head>
+    <title>Just Chart It!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="http://dygraphs.com/dygraph-combined.js"></script>
+    <script src="http://dygraphs.com/dygraph-options-reference.js"></script>
+    <script src="palette-combined.js"></script>
+    <script src="jci.js"></script>
+
+    <link rel="stylesheet" href="jci.css" />
+    <link rel="stylesheet" href="palette-combined.css" />
+  </head>
+  <body>
+    <div id="config">
+      Paste your CSV/TSV data in here:<br/>
+      <form action="/save" method="post">
+      <textarea name="data" rows=10 cols=40 id="data">{{ data }}</textarea>
+
+      <p>Options:<br/>
+      <textarea name="config" rows=10 cols=40 id="options">{{ options }}</textarea>
+      </p>
+
+      <input type=button value="Chart It!" onClick="chartIt()" />
+      &nbsp; &nbsp;
+      <input id="save_button" type=submit value="Save" />
+      </form>
+    </div>
+
+    <div id="chart"></div>
+    <div id="optionsPalette"></div>
+  </body>
+</html>
+{% endautoescape %}
