@@ -1,10 +1,13 @@
+import db
+import jinja2
+import os
 import webapp2
 from google.appengine.api import users
-from google.appengine.ext.webapp import template
 
 
-import db
-
+JINJA_ENVIRONMENT = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'])
 
 class SaveHandler(webapp2.RequestHandler):
   def post(self):
@@ -33,7 +36,8 @@ class AdminListHandler(webapp2.RequestHandler):
     template_values = {
       'keys' : db.ListChartKeys()
     }
-    self.response.out.write(template.render('templates/admin-list.html', template_values))
+    template = JINJA_ENVIRONMENT.get_template('templates/admin-list.html')
+    self.response.out.write(template.render(template_values))
 
 class FooHandler(webapp2.RequestHandler):
   def get(self):

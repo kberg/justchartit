@@ -4,6 +4,10 @@ runtime: python27
 api_version: 1
 threadsafe: false
 
+libraries:
+- name: jinja2
+  version: latest
+
 handlers:
 - url: /
   static_files: index.html
@@ -30,4 +34,4 @@ handlers:
   login: required
 
 - url: /_ah/login_required
-  script: do_openid_login.py
+  script: do_openid_login.app
